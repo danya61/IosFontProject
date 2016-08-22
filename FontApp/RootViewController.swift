@@ -76,7 +76,7 @@ class RootViewController: UITableViewController {
             let familyName = familyNames[indexPath.row]
             listVC.fontNames = UIFont.fontNamesForFamilyName(familyName) 
             listVC.fontNames.sortInPlace{return $0 < $1}
-            listVC.navigationItem.title = familyName
+            listVC.navigationItem.title = "More Fonts"
             listVC.showsFavorites = false
         } else{
             listVC.fontNames = favoritesList.favorites

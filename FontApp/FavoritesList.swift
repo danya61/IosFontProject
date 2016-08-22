@@ -39,6 +39,13 @@ class FavoritesList{
         }
     }
     
+    func moveItem(fromIndex from : Int, toIndex to : Int){
+        let item = favorites[from]
+        favorites.removeAtIndex(from)
+        favorites.insert(item, atIndex: to)
+        saveFavorites()
+    }
+    
     private func saveFavorites(){
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(favorites, forKey: "favorites")

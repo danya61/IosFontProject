@@ -19,7 +19,9 @@ class FontListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if showsFavorites{
+            navigationItem.rightBarButtonItem = editButtonItem()
+        }
         let prefferedTableViewFont = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
         cellPointSize = prefferedTableViewFont.pointSize
     }
@@ -54,26 +56,51 @@ class FontListViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+        FavoritesList.sharedFavoriteList.moveItem(fromIndex: sourceIndexPath.row, toIndex: destinationIndexPath.row)
+        fontNames = FavoritesList.sharedFavoriteList.favorites
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)!
+        let font = fontForDisplay(atIndexPath: indexPath)
+        
+        if segue.identifier == "ShowFontSizes"{
+            let sizeVC = segue.destinationViewController as! FontSizesViewController
+            sizeVC.navigationItem.title = "Sizes"
+            sizeVC.Font = font
+        } else {
+            let infoVC = segue.destinationViewController as! FontInfoViewCotroller
+            infoVC.font = font
+            infoVC.favorite = FavoritesList.sharedFavoriteList.favorites.contains(font.fontName)
+        }
+    }
 
-    /*
+    
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+        return showsFavorites
     }
-    */
+    
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        if !showsFavorites {
+            return
+        }
+        
+        if editingStyle == UITableViewCellEditingStyle.Delete{
+            let favorite = fontNames[indexPath.row]
+            FavoritesList.sharedFavoriteList.removeFvorite(favorite)
+            fontNames = FavoritesList.sharedFavoriteList.favorites
+            
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        }
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
