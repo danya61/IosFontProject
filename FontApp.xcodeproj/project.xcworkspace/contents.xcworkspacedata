@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:FontApp.xcodeproj">
+      location = "self:/Users/danya-mac/IosFontProject/Fonts.xcodeproj">
    </FileRef>
 </Workspace>
