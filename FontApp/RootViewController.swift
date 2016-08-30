@@ -8,13 +8,17 @@
 
 import UIKit
 
-class RootViewController: UITableViewController {
+class RootViewController: UITableViewController, UISearchResultsUpdating{
 
     private var familyNames : [String]!
     private var cellPointSize : CGFloat!
     private var favoritesList : FavoritesList!
     private let familyCell = "FamilyName"
     private let favoritesCell = "Favorites"
+    var searchController = UISearchController(searchResultsController: nil)
+    var filteredNames : [String] = []
+    
+    
     
     
     override func viewDidLoad() {
@@ -25,6 +29,12 @@ class RootViewController: UITableViewController {
         cellPointSize = prefferedTableViewFont.pointSize
         favoritesList = FavoritesList.sharedFavoriteList
         
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        searchController.searchBar.placeholder = "Enter search"
+        searchController.searchBar.sizeToFit()
+        tableView.tableHeaderView = searchController.searchBar
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -44,12 +54,39 @@ class RootViewController: UITableViewController {
         }
     }
     
+    
+    func updateSearchResultsForSearchController(searchController : UISearchController){
+        let searchString = searchController.searchBar.text
+        filteredNames.removeAll(keepCapacity: true)
+        
+        if !searchString!.isEmpty {
+            let filter : String -> Bool = {name in
+                
+                let range = name.rangeOfString(searchString!, options: NSStringCompareOptions.CaseInsensitiveSearch)
+                return range != nil
+            }
+            
+            let matches = familyNames.filter(filter)
+            filteredNames += matches
+        }
+        tableView.reloadData()
+    }
+
+    
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return favoritesList.favorites.isEmpty ? 1 : 2
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? familyNames.count : 1
+        if section == 0{
+            if searchController.active && searchController.searchBar.text != "" {
+                return filteredNames.count
+            } else {
+                return familyNames.count}
+        } else {
+           return 1 }
+        
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -58,10 +95,17 @@ class RootViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0{
+            let strName : String
             let cell = tableView.dequeueReusableCellWithIdentifier(familyCell,forIndexPath: indexPath) as UITableViewCell
+            if searchController.active && searchController.searchBar.text != "" {
+                strName = filteredNames[indexPath.row]
+            }
+            else {
+                strName = familyNames[indexPath.row]
+            }
             cell.textLabel?.font = fontForDisplay(atIndexPath: indexPath)
-            cell.textLabel?.text = familyNames[indexPath.row]
-            cell.detailTextLabel?.text = familyNames[indexPath.row]
+            cell.textLabel?.text = strName
+            cell.detailTextLabel?.text = strName
             return cell
         } else {
             return tableView.dequeueReusableCellWithIdentifier(favoritesCell,forIndexPath: indexPath) as UITableViewCell
@@ -73,8 +117,13 @@ class RootViewController: UITableViewController {
         let listVC = segue.destinationViewController as! FontListViewController
         
         if indexPath.section == 0{
-            let familyName = familyNames[indexPath.row]
-            listVC.fontNames = UIFont.fontNamesForFamilyName(familyName) 
+            let strName : String
+            if searchController.active && searchController.searchBar.text != "" {
+                strName = filteredNames[indexPath.row]
+            } else {
+                strName = familyNames[indexPath.row]
+            }
+            listVC.fontNames = UIFont.fontNamesForFamilyName(strName)
             listVC.fontNames.sortInPlace{return $0 < $1}
             listVC.navigationItem.title = "More Fonts"
             listVC.showsFavorites = false

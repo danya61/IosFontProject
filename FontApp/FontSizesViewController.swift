@@ -31,6 +31,10 @@ class FontSizesViewController: UITableViewController{
         // #warning Incomplete implementation, return the number of rows
         return pointSizes.count
     }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return pointSizes[indexPath.row] + 50
+    }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifire, forIndexPath: indexPath) as! UITableViewCell

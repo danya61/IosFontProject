@@ -19,7 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		040650841D5D050A00B7D415 /* Fonts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fonts.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		040650841D5D050A00B7D415 /* FontApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FontApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		040650871D5D050A00B7D415 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0406508C1D5D050A00B7D415 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0406508E1D5D050A00B7D415 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -54,7 +54,7 @@
 		040650851D5D050A00B7D415 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				040650841D5D050A00B7D415 /* Fonts.app */,
+				040650841D5D050A00B7D415 /* FontApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -79,9 +79,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		040650831D5D050A00B7D415 /* Fonts */ = {
+		040650831D5D050A00B7D415 /* FontApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 040650961D5D050A00B7D415 /* Build configuration list for PBXNativeTarget "Fonts" */;
+			buildConfigurationList = 040650961D5D050A00B7D415 /* Build configuration list for PBXNativeTarget "FontApp" */;
 			buildPhases = (
 				040650801D5D050A00B7D415 /* Sources */,
 				040650811D5D050A00B7D415 /* Frameworks */,
@@ -91,9 +91,9 @@
 			);
 			dependencies = (
 			);
-			name = Fonts;
+			name = FontApp;
 			productName = FontApp;
-			productReference = 040650841D5D050A00B7D415 /* Fonts.app */;
+			productReference = 040650841D5D050A00B7D415 /* FontApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -112,7 +112,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0406507F1D5D050A00B7D415 /* Build configuration list for PBXProject "Fonts" */;
+			buildConfigurationList = 0406507F1D5D050A00B7D415 /* Build configuration list for PBXProject "FontApp" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -125,7 +125,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				040650831D5D050A00B7D415 /* Fonts */,
+				040650831D5D050A00B7D415 /* FontApp */,
 			);
 		};
 /* End PBXProject section */
@@ -270,8 +270,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FontApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = danya.Fonts;
-				PRODUCT_NAME = Fonts;
+				PRODUCT_BUNDLE_IDENTIFIER = danya.FontApp;
+				PRODUCT_NAME = FontApp;
 			};
 			name = Debug;
 		};
@@ -281,15 +281,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FontApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = danya.Fonts;
-				PRODUCT_NAME = Fonts;
+				PRODUCT_BUNDLE_IDENTIFIER = danya.FontApp;
+				PRODUCT_NAME = FontApp;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0406507F1D5D050A00B7D415 /* Build configuration list for PBXProject "Fonts" */ = {
+		0406507F1D5D050A00B7D415 /* Build configuration list for PBXProject "FontApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				040650941D5D050A00B7D415 /* Debug */,
@@ -298,7 +298,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		040650961D5D050A00B7D415 /* Build configuration list for PBXNativeTarget "Fonts" */ = {
+		040650961D5D050A00B7D415 /* Build configuration list for PBXNativeTarget "FontApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				040650971D5D050A00B7D415 /* Debug */,
